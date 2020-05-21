@@ -1,0 +1,66 @@
+[
+    {
+        "from" : "Auckland",
+        "to" : "Suva",
+        "price" : 800,
+        "departTime" : "8.00 AM",
+        "arriveTime" : "11.00 AM",
+        "flightNo" : "FJ431",
+        "depatureDate" : "4/18/2020",
+        "arrivalDate" : "4/18/2020",
+        "seats" : 120
+    },
+
+    {
+        "from" : "Auckland",
+        "to" : "Suva",
+        "price" : 900,
+        "departTime" : "8.00 PM",
+        "arriveTime" : "11.00 PM",
+        "flightNo" : "FJ430",
+        "depatureDate" : "4/18/2020",
+        "arrivalDate" : "4/18/2020",
+        "seats" : 120
+
+    },
+
+    {
+        "from" : "Suva",
+        "to" : "Auckland",
+        "price" : 500,
+        "departTime" : "12.00 PM",
+        "arriveTime" : "03.00 PM",
+        "flightNo" : "FJ430",
+        "depatureDate" : "4/19/2020",
+        "arrivalDate" : "4/19/2020",
+        "seats" : 120
+
+    },
+
+    {
+        "from" : "Suva",
+        "to" : "Auckland",
+        "price" : 900,
+        "departTime" : "12.00 AM",
+        "arriveTime" : "3.00 AM",
+        "flightNo" : "FJ430",
+        "depatureDate" : "4/19/2020",
+        "arrivalDate" : "4/19/2020",    
+        "seats" : 120
+
+    },
+
+    {
+        "from" : "Auckland",
+        "to" : "Sydney",
+        "price" : 300,
+        "departTime" : "10.00 AM",
+        "arriveTime" : "12.00 PM",
+        "flightNo" : "NZ747",
+        "depatureDate" : "4/18/2020",
+        "arrivalDate" : "4/19/2020",    
+        "seats" : 120
+
+    }
+
+]
