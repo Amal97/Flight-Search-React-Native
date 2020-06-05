@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "myNewProject",
-    "slug": "myNewProject",
+    "name": "FlightSearch",
+    "slug": "FlightSearch",
     "platforms": [
       "ios",
       "android",

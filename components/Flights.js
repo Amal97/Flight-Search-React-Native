@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FlightData from '../data/FlightData.json'
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-import { Card } from 'react-native-elements';
+import { Card, ListItem,  Icon } from 'react-native-elements'
 
 export default class Flights extends Component {
 

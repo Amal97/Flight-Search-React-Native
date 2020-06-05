@@ -69,8 +69,10 @@ export default class FormDetails extends Component {
 
     returnDayBox = () =>{
         if(this.state.OneWay === false){
-            return(
-                <TextInput style={styles.textInput} placeholder="Enter Return Date" onChangeText={value => this.onChange("ReturnDate", value)} />
+            return(<React.Fragment>
+                <Text>Enter Return Date</Text>
+                <TextInput style={styles.textInput}  onChangeText={value => this.onChange("ReturnDate", value)} />
+            </React.Fragment>
             )
         }
         else{
@@ -88,29 +90,28 @@ export default class FormDetails extends Component {
 
   render(){
     return (
-      <View style={styles.container}>
-      <View style={{flexDirection: 'row'}}>        
-        <Text> Return </Text>
-            <Switch
+    <View style={styles.container}>
 
-                ios_backgroundColor="#81b0ff"
-                onValueChange={this.toggleSwitch}
-                value={this.state.OneWay}
-             />
-        <Text> One Way </Text>
-
+        <View style={{flexDirection: 'row'}}>        
+            <Text>   Return   </Text>
+            <Switch ios_backgroundColor="#81b0ff" onValueChange={this.toggleSwitch} value={this.state.OneWay} />
+            <Text>   One Way   </Text>
         </View>
-
-        <View style={{paddingTop: "20%"}}>
-        <TextInput style={styles.textInput} name="OriginCity" placeholder="Enter Origin City" onChangeText={value => this.onChange("OriginCity", value)} />
-        <TextInput style={styles.textInput} placeholder="Enter Destination City" onChangeText={value => this.onChange("DestinationCity", value)} />
-        <TextInput style={styles.textInput} placeholder="Enter Depature Date" onChangeText={value => this.onChange("DepatureDate", value)} />
-        {this.returnDayBox()}
-        <TextInput style={styles.textInput} placeholder="Enter Passengers"onChangeText={value => this.onChange("Passengers", value)} />
-      <Button title="Search" onPress={this.onSubmit} />
-      </View>
-
-      </View>
+        
+        <View style={{paddingTop: "10%"}}>
+        <Text>Enter Origin City </Text>
+            <TextInput style={styles.textInput}  onChangeText={value => this.onChange("OriginCity", value)} />
+        <Text>Enter Destination City </Text>    
+            <TextInput style={styles.textInput}  onChangeText={value => this.onChange("DestinationCity", value)} />
+        <Text>Enter Depature Date </Text>
+            <TextInput style={styles.textInput}  onChangeText={value => this.onChange("DepatureDate", value)} />
+            {this.returnDayBox()}
+        <Text>Enter Passengers </Text>
+            <TextInput style={styles.textInput}  onChangeText={value => this.onChange("Passengers", value)} />
+            <Button title="Search" onPress={this.onSubmit} />
+        </View>
+    
+    </View>
     );
   }
 }
@@ -120,7 +121,10 @@ const styles = StyleSheet.create({
     padding: 50
   },
   textInput: {
-      height: 40,
-      paddingLeft: 6
+    borderBottomWidth : 0.5,
+    borderColor: 'grey',
+    height: 40,
+    paddingLeft: 6,
+    marginBottom: 30
   }
 });

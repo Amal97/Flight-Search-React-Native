@@ -1,65 +1,34 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, ScrollView  } from 'react-native';
-import FormDetails from './components/FormDetails';
-import Flights from './components/Flights';
 
+import Home from './components/Home';
 import Login from './components/Login';
-// import Navigator from './routes/homeStack';
+import SignUp from './components/SignUp';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { navigationRef } from './RootNavigation';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import * as RootNavigation from './RootNavigation';
+
+const RootStack = createStackNavigator();
 
 export default class App extends Component {
- constructor(){
-   super();
-   this.state = {
-    DestinationCity:'',
-    DepatureDate: '',
-    OriginCity:'',
-    Passengers:0,
-    ReturnDate:  '',
-    OneWay:true,
-    fail: false,
-    priceRange:[0,20000]
-}
- }
 
- handleFail = () =>{
-   this.setState({
-     fail : true
-   });
- }
-
- handleSubmit = (Fail,OriginCity,DestinationCity,DepatureDate,ReturnDate,Passengers,OneWay) => {
-  this.setState({
-      fail: Fail,
-      DestinationCity:DestinationCity,
-      DepatureDate:DepatureDate,
-      Passengers:Passengers,
-      ReturnDate:ReturnDate,
-      OneWay:OneWay,
-      OriginCity:OriginCity
-  });
-}
-
-handlePrice = (priceRange) =>{
-  this.setState({
-    priceRange:priceRange
-  })
-}
+  SignOut = () =>{
+    RootNavigation.navigate('Login');
+  }
 
   render(){
     return (
-      <View style={styles.container}>
-          {/* <View >
-          <Text style={styles.header}> Flight Search </Text>  
-          <FormDetails handleFail={this.handleFail} handleSubmit={this.handleSubmit} slider={this.handlePrice}/>
-          </View>
-          <ScrollView> 
-          <Flights data = {this.state}/>
-          </ScrollView> */}
-
-          {/* <Navigator /> */}
-          <Login />
-
-      </View>
+      <NavigationContainer ref={navigationRef}>{
+        <RootStack.Navigator>
+        <RootStack.Screen name="Login" component={Login} />
+        <RootStack.Screen name="Home" component={Home} options={{ headerRight: () => (
+          <Text style={{fontWeight: "bold", fontSize: 15}} onPress={() => this.SignOut()}> Sign Out </Text>),}} />
+        <RootStack.Screen name="Sign Up" component={SignUp} />
+      </RootStack.Navigator>
+      }</NavigationContainer>
     );
   }
 }

@@ -1,62 +1,65 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Text, View, Button, StyleSheet, TextInput, AsyncStorage, Alert } from 'react-native';
 import { Constants } from 'expo';
 
+import * as RootNavigation from '../RootNavigation';
+
 export default class Login extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             name: '',
             password: '',
             storedName: '',
-            storedPassword: ''
+            storedPassword: '',
+            fail: false,
+            count: 0
         };
     }
 
-    setUserAndPassword(){
-        console.log("setting");
-        AsyncStorage.setItem("name", "Amal");
-        AsyncStorage.setItem("password", "abc");
-    }
-    
     onChangeText(data,value) {
         AsyncStorage.setItem(data, value, () => {
             this.setState({
                 [data]: value,
             });
-            console.log('Button clicked');
         });
     }
 
-    componentDidMount = () => {
-        AsyncStorage.getItem('name').then((value) => this.setState({ 'storedName': value }))
-        AsyncStorage.getItem('password').then((value) => this.setState({ 'storedPassword': value }))
+    componentWillMount() {
+        const { navigation } = this.props;
+        this.focusListener = navigation.addListener('focus', () => {
+            this.setState({ count: 0 });
+            AsyncStorage.getItem('name').then((value) => this.setState({ 'storedName': value }));
+            AsyncStorage.getItem('password').then((value) => this.setState({ 'storedPassword': value })) 
+        });
     }
 
     checkDetails() {
+            if(this.state.name == this.state.storedName && this.state.password == this.state.storedPassword){
+                this.setState({
+                    fail: false
+                })
+                RootNavigation.navigate('Home');
+            }
+            else{
+                this.setState({
+                    fail: true
+                })
+            }
+        }
 
-        if(this.state.name == this.state.storedName && this.state.password == this.state.storedPassword){
-            console.log("PASS");
-        }
-        else{
-            console.log("FAIL");
-        }
-    }
     render() {
-        const setUserAndPassword = () => {
-            AsyncStorage.setItem("name", "Amal");
-            AsyncStorage.setItem("password", "abc");
-        }
-
         return (
             <React.Fragment>
-                {setUserAndPassword()}
-
+                <Text style={styles.header}> Login to Flight Searcher </Text>
                 <View style={styles.container}>
-                    <TextInput style={styles.box} onChangeText={value => {this.onChangeText("name",value);}}/>
-                    <TextInput style={styles.box} onChangeText={value => {this.onChangeText("password", value);}}/>
+                <TextInput style={styles.textInput} placeholder="Username" onChangeText={value => this.onChangeText("name",value)} />
+                <TextInput style={styles.textInput} placeholder="Password" onChangeText={value => this.onChangeText("password", value)} />
 
-                    <Button title="Retrieve Name" onPress={() => {this.checkDetails();}} />
+                <Button title="Sign In" onPress={() => {this.checkDetails();}} />
+                <Button title="Sign Up" onPress={() => {RootNavigation.navigate('Sign Up');;}} />
+                {this.state.fail && <Text style={{color: 'red'}}> Invalid Username or Password </Text>} 
                 </View>
             </React.Fragment>
         );
@@ -64,15 +67,17 @@ export default class Login extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ecf0f1',
+      padding: 50
     },
-    box: {
-        borderRadius: 5,
-        borderColor: 'gray',
-        borderWidth: 1,
-        width: 200,
+    textInput: {
+        height: 40,
+        paddingLeft: 6
     },
-});
+    header: {
+        fontSize: 30,
+        fontWeight: "bold",
+        textAlign: "center",
+        paddingTop: 20
+      }
+  });
+  
